@@ -1,0 +1,122 @@
+-- Create the database
+CREATE DATABASE clothify_store;
+USE clothify_store;
+
+-- Create employees table
+CREATE TABLE employees (
+    employee_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100),
+    company VARCHAR(100),
+    email VARCHAR(100)
+);
+
+-- Insert data into employees table
+INSERT INTO employees (name, company, email) VALUES
+('Nimal Perera', 'Clothify Store', 'nimal@clothify.com'),
+('Saman Kumara', 'Dolosmahe Store', 'saman@clothifyMan.com'),
+('Tharushi Fernando', 'Clothify Store', 'tharushi@clothify.com'),
+('Madhavi Weerasinghe', 'Clothify Store', 'madhavi@clothify.com'),
+('Ruwan Wickramasinghe', 'Clothify Store', 'ruwanclothif@y.com'),
+('Sunil Gamage', 'Rich Look', 'Sunilada@gmail.com'),
+('Tharushi Fernando', 'Clothify Storer', 'tharushi@clotytrhify.com'),
+('Janith Soyza', 'House of fassion', 'SoyzaClothify@gmail.com');
+
+-- Create order_details table
+CREATE TABLE order_details (
+    order_id INT,
+    product_id INT,
+    quantity INT,
+    price DECIMAL(10, 2),
+    discount DECIMAL(10, 2),
+    product_name VARCHAR(100),
+    total DECIMAL(10, 2)
+);
+
+-- Insert data into order_details table
+INSERT INTO order_details (order_id, product_id, quantity, price, discount, product_name, total) VALUES
+(2, 2, 1, 1500.00, 150.00, 'Gents T-Shirt', 1500.00),
+(1, 12, 2, 2200.00, 220.00, 'Winter Sweater', 4400.00),
+(1, 20, 1, 3200.00, 320.00, 'Summer Dress', 3200.00),
+(3, 34, 1, 1800.00, 180.00, 'Casual Shirt', 1700.00),
+(4, 36, 3, 3200.00, 320.00, 'Summer Dress', 9600.00),
+(5, 38, 1, 2200.00, 220.00, 'Winter Sweater', 2200.00);
+
+-- Create orders table
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY AUTO_INCREMENT,
+    employee_id INT,
+    total_cost DECIMAL(10, 2),
+    payment_type VARCHAR(20),
+    order_date DATETIME,
+    customer_email VARCHAR(100),
+    customer_name VARCHAR(100),
+    phone_number VARCHAR(15)
+);
+
+-- Insert data into orders table
+INSERT INTO orders (employee_id, total_cost, payment_type, order_date, customer_email, customer_name, phone_number) VALUES
+(1, 3700.00, 'card', '2024-10-10 09:24:36', 'customer1@example.com', 'John Doe', '123-456-7890'),
+(NULL, 1500.00, 'cash', '2024-10-10 09:24:36', 'customer2@example.com', 'Jane Smith', '234-567-8901'),
+(3, 3200.00, 'online', '2024-10-10 09:24:36', 'customer3@example.com', 'Alice Johnson', '345-678-9012'),
+(4, 900.00, 'cash', '2024-10-10 09:24:36', 'customer4@example.com', 'Bob Brown', '456-789-0123'),
+(5, 2000.00, 'card', '2024-10-10 09:24:36', 'customer5@example.com', 'Charlie Davis', '567-890-1234');
+
+-- Create password_resets table
+CREATE TABLE password_resets (
+    email VARCHAR(100) PRIMARY KEY,
+    token VARCHAR(255),
+    created_at DATETIME
+);
+
+-- Create products table
+CREATE TABLE products (
+    product_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100),
+    category VARCHAR(50),
+    size VARCHAR(10),
+    price DECIMAL(10, 2),
+    quantity INT,
+    image VARCHAR(255),
+    supplier_id INT,
+    created_at DATETIME,
+    updated_at DATETIME,
+    discount INT
+);
+
+-- Insert data into products table
+INSERT INTO products (name, category, size, price, quantity, image, supplier_id, created_at, updated_at, discount) VALUES
+('Gents T-Shirt', 'Gents', 'L', 1500.00, 30, NULL, 2, '2024-10-10 09:24:19', '2024-10-15 08:54:39', 10),
+('Winter Sweater', 'Kids', 'S', 2200.00, 32, 'image.jpg', 1, '2024-10-13 00:00:00', '2024-10-16 18:33:26', 25),
+('Ladies Jacket', 'Ladies', 'M', 2800.00, 15, NULL, 1, '2024-10-13 00:22:01', '2024-10-16 18:33:26', 5),
+('Kids Backpack', 'Kids', 'M', 1200.00, 30, 'image.jpg', 3, '2024-10-13 00:00:00', '2024-10-16 18:33:27', 10),
+('Winter Sweater', 'Kids', 'XL', 2200.00, 10, 'image.jpg', 1, '2024-10-13 00:00:00', '2024-10-15 08:54:39', 15),
+('Summer Dress', 'Ladies', 'S', 3200.00, 27, 'image.jpg', 2, '2024-10-13 00:00:00', '2024-10-15 08:54:39', 20),
+('Casual Shirt', 'Gents', 'L', 1800.00, 18, NULL, 3, '2024-10-09 15:45:00', '2024-10-15 08:54:39', 12),
+('Summer Dress', 'Ladies', 'S', 3200.00, 22, NULL, 2, '2024-10-13 00:22:40', '2024-10-15 08:54:39', 18),
+('Winter Sweater', 'Gents', 'XL', 2200.00, 21, 'image.jpg', 1, '2024-10-13 00:00:00', '2024-10-15 08:54:39', 15);
+
+-- Create sales table
+CREATE TABLE sales (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    sale_date DATETIME,
+    total_amount DECIMAL(10, 2),
+    category VARCHAR(50)
+);
+
+-- Insert data into sales table
+INSERT INTO sales (sale_date, total_amount, category) VALUES
+('2021-10-01 10:30:00', 500.00, 'Gents'),
+('2021-10-16 11:00:00', 200.00, 'Ladies'),
+('2021-11-05 10:45:00', 150.00, 'Kids'),
+('2021-12-12 09:00:00', 100.00, 'Others'),
+('2022-01-12 14:30:00', 300.00, 'Gents'),
+('2022-02-07 16:00:00', 700.00, 'Ladies'),
+('2022-03-03 12:15:00', 450.00, 'Kids'),
+('2022-04-14 10:30:00', 500.00, 'Others'),
+('2022-05-20 11:00:00', 200.00, 'Gents'),
+('2022-06-17 12:15:00', 150.00, 'Ladies'),
+('2022-07-24 10:45:00', 300.00, 'Kids'),
+('2022-08-30 14:00:00', 120.00, 'Others'),
+('2022-09-11 09:30:00', 100.00, 'Gents'),
+('2022-10-05 15:30:00', 600.00, 'Ladies'),
+('2022-11-22 14:30:00', 450.00, 'Kids');
