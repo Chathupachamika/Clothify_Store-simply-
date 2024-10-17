@@ -120,3 +120,35 @@ INSERT INTO sales (sale_date, total_amount, category) VALUES
 ('2022-09-11 09:30:00', 100.00, 'Gents'),
 ('2022-10-05 15:30:00', 600.00, 'Ladies'),
 ('2022-11-22 14:30:00', 450.00, 'Kids');
+
+
+ALTER TABLE orders
+ADD CONSTRAINT fk_employee
+FOREIGN KEY (employee_id)
+REFERENCES employees(employee_id)
+ON DELETE SET NULL;
+
+ALTER TABLE order_details
+ADD CONSTRAINT fk_order
+FOREIGN KEY (order_id)
+REFERENCES orders(order_id)
+ON DELETE CASCADE;
+
+ALTER TABLE order_details
+ADD CONSTRAINT fk_product
+FOREIGN KEY (product_id)
+REFERENCES products(product_id)
+ON DELETE RESTRICT;
+
+CREATE TABLE suppliers (
+    supplier_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100),
+    contact_email VARCHAR(100)
+);
+
+ALTER TABLE products
+ADD CONSTRAINT fk_supplier
+FOREIGN KEY (supplier_id)
+REFERENCES suppliers(supplier_id)
+ON DELETE SET NULL;
+
